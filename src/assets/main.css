@@ -1,0 +1,13 @@
+@import "./normalizer.css";
+
+:root {
+  --blue-color: rgb(42, 147, 165);
+  --red-color: rgb(163, 76, 77);
+  --green-color: rgb(76, 163, 118);
+  --cell-width: 3vw;
+}
+
+ul,
+ol {
+  list-style-type: none;
+}
