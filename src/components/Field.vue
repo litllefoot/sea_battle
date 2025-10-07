@@ -2,7 +2,7 @@
   <div class="word-numbers-and-field">
     <words></words>
     <div class="numbers-and-field">
-      <numbers></numbers>
+      <Numbers></Numbers>
       <ul>
         <li v-for="rowField in arrOfField">
           <div class="row-field">
@@ -15,22 +15,16 @@
 </template>
 
 <script setup>
-import { reactive } from "vue";
-import numbers from "./numbers.vue";
+import Numbers from "./Numbers.vue";
 import Words from "./Words.vue";
 
-const arrOfField = reactive([
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null],
-]);
+defineProps({
+  arrOfField: {
+    type: Array,
+    required: true,
+    validator: (value) => value.length === 10,
+  },
+}); //обязательный пропс у которого тип массив, и проверка на валидность длина 10
 </script>
 
 <style>
