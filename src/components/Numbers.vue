@@ -13,5 +13,6 @@
   aspect-ratio: 1;
   box-sizing: border-box;
   line-height: var(--cell-width);
+  user-select: none;
 }
 </style>

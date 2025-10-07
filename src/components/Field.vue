@@ -6,7 +6,13 @@
       <ul>
         <li v-for="rowField in arrOfField">
           <div class="row-field">
-            <div v-for="cell in rowField" class="cell-field">{{ cell }}</div>
+            <div
+              v-for="cell in rowField"
+              class="cell-field"
+              @click="$emit('open-cell', $event)"
+            >
+              {{ cell }}
+            </div>
           </div>
         </li>
       </ul>
@@ -25,6 +31,8 @@ defineProps({
     validator: (value) => value.length === 10,
   },
 }); //обязательный пропс у которого тип массив, и проверка на валидность длина 10
+
+defineEmits(["open-cell"]);
 </script>
 
 <style>
@@ -49,5 +57,10 @@ defineProps({
   border: 2px solid black;
   background-color: var(--blue-color);
   box-sizing: border-box;
+  color: var(--blue-color);
+  text-align: center;
+  line-height: var(--cell-width);
+  font-size: 2rem;
+  user-select: none;
 }
 </style>

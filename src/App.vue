@@ -2,36 +2,45 @@
 import { reactive } from "vue";
 import Field from "./components/Field.vue";
 const arrOfFieldMy = reactive([
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null],
+  [" ", "x", " ", " ", " ", " ", " ", " ", " ", "x"],
+  [" ", "x", " ", " ", " ", " ", " ", " ", " ", " "],
+  [" ", "x", " ", " ", " ", " ", " ", " ", " ", " "],
+  [" ", "x", " ", " ", " ", " ", " ", " ", " ", " "],
+  [" ", "x", " ", " ", " ", " ", " ", " ", " ", " "],
+  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+  [" ", " ", " ", " ", " ", " ", " ", " ", " ", "x"],
 ]);
 
 const arrOfFieldComputer = reactive([
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null],
-  [null, null, null, null, null, null, null, null, null, null],
+  [" ", "x", " ", " ", " ", " ", " ", " ", " ", "x"],
+  [" ", "x", " ", " ", " ", " ", " ", " ", " ", " "],
+  [" ", "x", " ", " ", " ", " ", " ", " ", " ", " "],
+  [" ", "x", " ", " ", " ", " ", " ", " ", " ", " "],
+  [" ", "x", " ", " ", " ", " ", " ", " ", " ", " "],
+  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+  [" ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+  [" ", " ", " ", " ", " ", " ", " ", " ", " ", "x"],
 ]);
+
+function openCell(event) {
+  if (event.target.textContent === "x") {
+    event.target.style.color = "black";
+    event.target.style.backgroundColor = "var(--green-color)";
+  } else {
+    event.target.style.backgroundColor = "var(--red-color)";
+  }
+}
 </script>
 
 <template>
   <div class="field">
-    <Field :arrOfField="arrOfFieldMy"></Field>
-    <Field :arrOfField="arrOfFieldComputer"></Field>
+    <Field :arrOfField="arrOfFieldMy" @open-cell="openCell"></Field>
+    <Field :arrOfField="arrOfFieldComputer" @open-cell="openCell"></Field>
   </div>
 </template>
 

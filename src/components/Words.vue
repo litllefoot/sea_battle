@@ -19,5 +19,6 @@ const word = ["А", "Б", "В", "Г", "Д", "Е", "Ж", "З", "И", "К"];
   box-sizing: border-box;
   line-height: var(--cell-width);
   text-align: center;
+  user-select: none;
 }
 </style>
