@@ -4,7 +4,9 @@
   --blue-color: rgb(42, 147, 165);
   --red-color: rgb(163, 76, 77);
   --green-color: rgb(76, 163, 118);
+  --hover-color: rgb(62, 169, 187);
   --cell-width: 3vw;
+  --transition-time: 0.3s;
 }
 
 ul,

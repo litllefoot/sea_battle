@@ -9,6 +9,7 @@
             <div
               v-for="cell in rowField"
               class="cell-field"
+              :class="{ 'my-computer': isMyComputer }"
               @click="$emit('open-cell', $event)"
             >
               {{ cell }}
@@ -30,6 +31,7 @@ defineProps({
     required: true,
     validator: (value) => value.length === 10,
   },
+  isMyComputer: { type: Boolean, require: true },
 }); //обязательный пропс у которого тип массив, и проверка на валидность длина 10
 
 defineEmits(["open-cell"]);
@@ -57,10 +59,18 @@ defineEmits(["open-cell"]);
   border: 2px solid black;
   background-color: var(--blue-color);
   box-sizing: border-box;
-  color: var(--blue-color);
+  color: transparent;
   text-align: center;
   line-height: var(--cell-width);
   font-size: 2rem;
   user-select: none;
+  cursor: pointer;
+}
+.cell-field:hover {
+  background-color: var(--hover-color);
+  transition: var(--transition-time);
+}
+.my-computer {
+  color: black;
 }
 </style>

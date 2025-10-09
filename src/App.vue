@@ -4,6 +4,11 @@ import StartBtn from "./components/StartBtn.vue";
 import Field from "./components/Field.vue";
 import { useGenerationField } from "./components/ComputerField";
 
+const start = ref(false);
+function startGame() {
+  start.value = !start.value;
+}
+
 const arrOfFieldMy = reactive([
   [" ", "x", " ", " ", " ", " ", " ", " ", " ", "x"],
   [" ", "x", " ", " ", " ", " ", "x", "x", "x", " "],
@@ -27,18 +32,21 @@ function openCell(event) {
     event.target.style.backgroundColor = "var(--red-color)";
   }
 }
-
-const start = ref(false);
-function startGame() {
-  start.value = !start.value;
-}
 </script>
 
 <template>
   <StartBtn v-if="!start" @start-game="startGame"></StartBtn>
   <div v-else class="field">
-    <Field :arrOfField="arrOfFieldMy" @open-cell="openCell"></Field>
-    <Field :arrOfField="arrOfFieldComputer" @open-cell="openCell"></Field>
+    <Field
+      :arrOfField="arrOfFieldMy"
+      :is-my-computer="true"
+      @open-cell="openCell"
+    ></Field>
+    <Field
+      :arrOfField="arrOfFieldComputer"
+      :is-my-computer="false"
+      @open-cell="openCell"
+    ></Field>
   </div>
 </template>
 
