@@ -1,12 +1,8 @@
 <template>
   <div class="flex-btn">
-    <button @click="$emit('start-game')">В БОЙ</button>
+    <button>В АТАКУ</button>
   </div>
 </template>
-
-<script setup>
-defineEmits(["start-game"]);
-</script>
 
 <style>
 .flex-btn {

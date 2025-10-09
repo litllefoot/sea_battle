@@ -1,6 +1,8 @@
 export function useGenerationField(size = 10) {
   // Создаём пустое поле 10×10
-  const field = Array.from({ length: size }, () => Array(size).fill(" "));
+  const field = Array.from({ length: size }, () =>
+    Array(size).fill({ value: "", isOpened: false })
+  );
 
   // Определяем корабли по правилам
   const ships = [
@@ -44,7 +46,7 @@ export function useGenerationField(size = 10) {
     for (let i = 0; i < length; i++) {
       const nx = x + (horizontal ? i : 0);
       const ny = y + (horizontal ? 0 : i);
-      field[ny][nx] = "x";
+      field[ny][nx] = { value: "x", isOpened: false };
     }
   }
 

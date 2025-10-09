@@ -1,18 +1,27 @@
 <template>
   <div class="word-numbers-and-field">
-    <words></words>
+    <WordsField />
     <div class="numbers-and-field">
-      <Numbers></Numbers>
+      <NumbersField />
       <ul>
-        <li v-for="rowField in arrOfField">
+        <li
+          v-for="(rowField, rowFieldIndex) in arrOfField"
+          :key="rowFieldIndex"
+        >
           <div class="row-field">
             <div
-              v-for="cell in rowField"
+              v-for="(cell, cellIndex) in rowField"
+              :key="`${rowFieldIndex}:${cellIndex}`"
               class="cell-field"
-              :class="{ 'my-computer': isMyComputer }"
+              :class="{
+                'is-human': isHuman,
+                'default-color': !cell.isOpened,
+                'red-color': cell.isOpened && !cell.value,
+                'green-color': cell.isOpened && cell.value,
+              }"
               @click="$emit('open-cell', $event)"
             >
-              {{ cell }}
+              {{ cell.value }}
             </div>
           </div>
         </li>
@@ -22,8 +31,8 @@
 </template>
 
 <script setup>
-import Numbers from "./Numbers.vue";
-import Words from "./Words.vue";
+import NumbersField from "./NumbersField.vue";
+import WordsField from "./WordsField.vue";
 
 defineProps({
   arrOfField: {
@@ -31,7 +40,7 @@ defineProps({
     required: true,
     validator: (value) => value.length === 10,
   },
-  isMyComputer: { type: Boolean, require: true },
+  isHuman: { type: Boolean, require: true },
 }); //обязательный пропс у которого тип массив, и проверка на валидность длина 10
 
 defineEmits(["open-cell"]);
@@ -57,9 +66,7 @@ defineEmits(["open-cell"]);
   width: var(--cell-width);
   aspect-ratio: 1;
   border: 2px solid black;
-  background-color: var(--blue-color);
   box-sizing: border-box;
-  color: transparent;
   text-align: center;
   line-height: var(--cell-width);
   font-size: 2rem;
@@ -70,7 +77,20 @@ defineEmits(["open-cell"]);
   background-color: var(--hover-color);
   transition: var(--transition-time);
 }
-.my-computer {
-  color: black;
+
+.default-color {
+  background-color: var(--blue-color);
+  color: transparent;
+}
+.is-human {
+  color: var(--black-color);
+}
+.red-color {
+  background-color: var(--red-color);
+  color: var(--black-color);
+}
+.green-color {
+  background-color: var(--green-color);
+  color: var(--black-color);
 }
 </style>
