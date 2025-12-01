@@ -19,7 +19,7 @@
                 'red-color': cell.isOpened && !cell.value,
                 'green-color': cell.isOpened && cell.value,
               }"
-              @click="$emit('open-cell', $event)"
+              @click="$emit('open-cell', { x: rowFieldIndex, y: cellIndex })"
             >
               {{ cell.value }}
             </div>
@@ -73,14 +73,15 @@ defineEmits(["open-cell"]);
   user-select: none;
   cursor: pointer;
 }
-.cell-field:hover {
-  background-color: var(--hover-color);
-  transition: var(--transition-time);
-}
 
 .default-color {
   background-color: var(--blue-color);
   color: transparent;
+}
+
+.default-color:hover {
+  background-color: var(--hover-color);
+  transition: var(--transition-time);
 }
 .is-human {
   color: var(--black-color);

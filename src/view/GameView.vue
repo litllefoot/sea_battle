@@ -13,13 +13,11 @@ const arrOfFieldMy = reactive(useGenerationField(10));
 
 const arrOfFieldComputer = reactive(useGenerationField(10));
 
-function openCell(event) {
-  if (event.target.textContent === "x") {
-    event.target.style.color = "black";
-    event.target.style.backgroundColor = "var(--green-color)";
-  } else {
-    event.target.style.backgroundColor = "var(--red-color)";
-  }
+function openCell(coords, arrOfField) {
+  arrOfField[coords.x][coords.y] = {
+    ...arrOfField[coords.x][coords.y],
+    isOpened: true,
+  };
 }
 </script>
 
@@ -29,12 +27,12 @@ function openCell(event) {
     <AllField
       :arr-of-field="arrOfFieldMy"
       :is-human="true"
-      @open-cell="openCell"
+      @open-cell="(coords) => openCell(coords, arrOfFieldMy)"
     />
     <AllField
       :arr-of-field="arrOfFieldComputer"
       :is-human="false"
-      @open-cell="openCell"
+      @open-cell="(coords) => openCell(coords, arrOfFieldComputer)"
     />
   </div>
 </template>
