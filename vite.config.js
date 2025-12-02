@@ -10,7 +10,7 @@ export default defineConfig({
     vue(),
     /*     vueDevTools(), */
   ],
-  base: "/sea_battle/",
+  base: "/sea_battle/",  /* важно для гит хаб */
   resolve: {
     alias: {
       "@": fileURLToPath(new URL("./src", import.meta.url)),

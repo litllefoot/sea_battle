@@ -1,5 +1,5 @@
 <script setup>
-import { reactive, ref } from "vue";
+import { computed, reactive, ref } from "vue";
 import StartBtn from "../components/StartBtn.vue"; // .. выйти на уровень выше возьми папку компоненты
 import AllField from "../components/AllField.vue";
 import { useGenerationField } from "../composables/useGenerationField";
@@ -19,6 +19,15 @@ function openCell(coords, arrOfField) {
     isOpened: true,
   };
 }
+
+const whoIsNotActive = reactive({ human: false, computer: true });
+
+function passStep(value) {
+  if (!value) {
+    whoIsNotActive.human = !whoIsNotActive.human;
+    whoIsNotActive.computer = !whoIsNotActive.computer;
+  }
+}
 </script>
 
 <template>
@@ -27,12 +36,17 @@ function openCell(coords, arrOfField) {
     <AllField
       :arr-of-field="arrOfFieldMy"
       :is-human="true"
+      :is-not-active="whoIsNotActive.human"
       @open-cell="(coords) => openCell(coords, arrOfFieldMy)"
+      @pass-step="passStep"
     />
+    <!-- заворачиваем в стрелку так как аргумент дочерний, который сначала нужно получить и потом доп аргумент из текущего файла -->
     <AllField
       :arr-of-field="arrOfFieldComputer"
       :is-human="false"
+      :is-not-active="whoIsNotActive.computer"
       @open-cell="(coords) => openCell(coords, arrOfFieldComputer)"
+      @pass-step="passStep"
     />
   </div>
 </template>

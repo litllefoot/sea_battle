@@ -18,8 +18,14 @@
                 'default-color': !cell.isOpened,
                 'red-color': cell.isOpened && !cell.value,
                 'green-color': cell.isOpened && cell.value,
+                'not-active-field': isNotActive,
               }"
-              @click="$emit('open-cell', { x: rowFieldIndex, y: cellIndex })"
+              @click="
+                () => {
+                  $emit('open-cell', { x: rowFieldIndex, y: cellIndex });
+                  $emit('pass-step', cell.value);
+                }
+              "
             >
               {{ cell.value }}
             </div>
@@ -41,9 +47,10 @@ defineProps({
     validator: (value) => value.length === 10,
   },
   isHuman: { type: Boolean, require: true },
+  isNotActive: { type: Boolean, require: true },
 }); //обязательный пропс у которого тип массив, и проверка на валидность длина 10
 
-defineEmits(["open-cell"]);
+defineEmits(["open-cell", "pass-step"]);
 </script>
 
 <style>
@@ -93,5 +100,8 @@ defineEmits(["open-cell"]);
 .green-color {
   background-color: var(--green-color);
   color: var(--black-color);
+}
+.not-active-field {
+  pointer-events: none;
 }
 </style>
